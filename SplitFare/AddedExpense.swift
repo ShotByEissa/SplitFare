@@ -6,7 +6,7 @@ class AddedExpense {
     var category: String
     var amount: Double
     @Relationship var payer: Member
-    @Relationship var participants: [Member] // Who to split among (default all, exclude some)
+    @Relationship var participants: [Member]
     
     init(category: String, amount: Double, payer: Member, participants: [Member]) {
         self.category = category

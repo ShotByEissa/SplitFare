@@ -1,7 +1,7 @@
 import SwiftUI
 import SwiftData
 
-struct AddedCostsView: View {
+struct TripCostsView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var members: [Member]
     @Query private var addedExpenses: [AddedExpense]
@@ -35,7 +35,7 @@ struct AddedCostsView: View {
                 .onDelete(perform: deleteAddedExpenses)
                 
                 if !members.isEmpty {
-                    Button("Add Added Expense") {
+                    Button("Add Trip Expense") {
                         selectedParticipants = Set(members) // Default to all
                         newCategory = ""
                         newAmount = ""
@@ -47,11 +47,11 @@ struct AddedCostsView: View {
                 }
                 
                 let totalAdded = addedExpenses.reduce(0) { $0 + $1.amount }
-                Section(header: Text("Total Added Costs")) {
+                Section(header: Text("Total Trip Costs")) {
                     Text("$\(String(format: "%.2f", totalAdded))")
                 }
             }
-            .navigationTitle("Added Costs")
+            .navigationTitle("Trip Costs")
         }
         .fontDesign(.rounded)
         .background(Color(UIColor.systemBackground))
@@ -105,7 +105,7 @@ struct AddedCostsView: View {
                     Button("Save") {
                         if let amount = Double(newAmount), let payer = selectedPayer, !newCategory.isEmpty, !selectedParticipants.isEmpty {
                             let sortedParticipants = selectedParticipants.sorted { $0.name < $1.name }
-                            let expense = AddedExpense(category: newCategory, amount: amount, payer: payer, participants: Array(sortedParticipants))
+                            let expense = AddedExpense(category: newCategory, amount: amount, payer: payer, participants: sortedParticipants)
                             modelContext.insert(expense)
                             newCategory = ""
                             newAmount = ""
@@ -145,6 +145,6 @@ struct AddedCostsView: View {
 }
 
 #Preview {
-    AddedCostsView()
+    TripCostsView()
         .modelContainer(for: [Member.self, BudgetedExpense.self, AddedExpense.self], inMemory: true)
 }

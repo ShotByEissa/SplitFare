@@ -1,4 +1,5 @@
 import SwiftUI
+import SwiftData
 
 struct MainTabView: View {
     var body: some View {
@@ -8,9 +9,9 @@ struct MainTabView: View {
                     Label("Planner", systemImage: "pencil.and.list.clipboard")
                 }
             
-            AddedCostsView()
+            TripCostsView()
                 .tabItem {
-                    Label("Added Costs", systemImage: "plus.circle")
+                    Label("Trip Costs", systemImage: "plus.circle")
                 }
             
             TheSplitView()
