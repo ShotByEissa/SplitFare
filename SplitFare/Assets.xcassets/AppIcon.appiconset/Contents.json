@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "SplitFare-iOS-Default-1024x1024@1x.png",
+      "filename" : "SplitFare Icon.png",
       "idiom" : "universal",
       "platform" : "ios",
       "size" : "1024x1024"
@@ -13,7 +13,7 @@
           "value" : "dark"
         }
       ],
-      "filename" : "SplitFare-iOS-Dark-1024x1024@1x.png",
+      "filename" : "SplitFare Icon 1.png",
       "idiom" : "universal",
       "platform" : "ios",
       "size" : "1024x1024"
@@ -25,7 +25,7 @@
           "value" : "tinted"
         }
       ],
-      "filename" : "SplitFare-iOS-TintedLight-1024x1024@1x.png",
+      "filename" : "SplitFare Icon 2.png",
       "idiom" : "universal",
       "platform" : "ios",
       "size" : "1024x1024"
