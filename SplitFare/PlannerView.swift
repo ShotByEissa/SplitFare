@@ -73,40 +73,36 @@ struct PlannerView: View {
         .fontDesign(.rounded) // Adaptive, readable typography
         .background(Color(UIColor.systemBackground)) // Supports dark mode
         .sheet(isPresented: $showingAddMemberSheet) {
-            Form {
-                Section {
-                    TextField("Name", text: $newMemberName)
-                }
-            }
-            .safeAreaInset(edge: .bottom) {
-                VStack(spacing: 12) {
-                    Button("Save") {
-                        if !newMemberName.isEmpty && !members.contains(where: { $0.name == newMemberName }) {
-                            let newMember = Member(name: newMemberName)
-                            modelContext.insert(newMember)
-                            newMemberName = ""
-                            showingAddMemberSheet = false
-                            let haptic = UIImpactFeedbackGenerator(style: .medium)
-                            haptic.impactOccurred()
-                        }
-                    }
-                    .buttonStyle(.borderedProminent)
-                    .tint(.blue)
-                    .frame(maxWidth: .infinity)
-                    
-                    Button("Cancel") {
+            VStack(spacing: 8) {
+                TextField("Name", text: $newMemberName)
+                    .textFieldStyle(.roundedBorder)
+                
+                Button("Save") {
+                    if !newMemberName.isEmpty && !members.contains(where: { $0.name == newMemberName }) {
+                        let newMember = Member(name: newMemberName)
+                        modelContext.insert(newMember)
+                        newMemberName = ""
                         showingAddMemberSheet = false
+                        let haptic = UIImpactFeedbackGenerator(style: .medium)
+                        haptic.impactOccurred()
                     }
-                    .buttonStyle(.bordered)
-                    .frame(maxWidth: .infinity)
                 }
-                .padding()
-                .background(.thinMaterial)
+                .buttonStyle(.borderedProminent)
+                .tint(.blue)
+                .frame(maxWidth: .infinity)
+                
+                Button("Cancel") {
+                    showingAddMemberSheet = false
+                }
+                .buttonStyle(.bordered)
+                .frame(maxWidth: .infinity)
             }
+            .padding()
+            .background(Color(UIColor.systemBackground))
             .presentationDetents([.medium])
             .presentationDragIndicator(.visible)
-            .presentationBackground(.thinMaterial)
-            .presentationCornerRadius(28)
+            .presentationBackground(.thinMaterial) // iOS 26 subtle depth
+            .presentationCornerRadius(28) // Rounded for tactile feel
         }
         .sheet(isPresented: $showingAddBudgetedExpenseSheet) {
             if members.isEmpty {
